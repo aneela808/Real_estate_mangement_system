@@ -1,0 +1,853 @@
+/* Reset & body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80") no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    line-height: 1.6;
+    transition: color 0.4s, background 0.4s;
+}
+
+body:not(.dark-mode)::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+}
+
+body.dark-mode::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.1);
+    /* Further reduced opacity in dark mode for less black overlay */
+    z-index: -1;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.7);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 20px;
+    /* Reduced padding for smaller size */
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Reduced gap */
+}
+
+.logo {
+    font-size: 20px;
+    /* Reduced font size */
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.hamburger {
+    font-size: 24px;
+    /* Reduced font size */
+    cursor: pointer;
+    color: #ffcc00;
+}
+
+.theme-btn {
+    background: #ffcc00;
+    border: none;
+    padding: 8px 12px;
+    /* Reduced padding */
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.theme-btn:hover {
+    background: #e6b800;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    color: #fff;
+    transition: left 0.3s;
+    z-index: 2000;
+    padding-top: 60px;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    /* Reduced padding */
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.sidebar-links {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar-links li {
+    margin: 15px 0;
+    /* Reduced margin */
+    position: relative;
+}
+
+.sidebar-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    /* Reduced font size */
+    padding: 10px 20px;
+    /* Reduced padding */
+    display: block;
+}
+
+.sidebar-links li a:hover,
+.sidebar-links li a.active {
+    background: #ffcc00;
+    border-radius: 8px;
+}
+
+.dropdown-container {
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 0 0 8px 8px;
+}
+
+.dropdown-container li a {
+    padding-left: 30px;
+    /* Reduced padding */
+    font-size: 14px;
+    /* Reduced font size */
+}
+
+.dropdown.active .dropdown-container {
+    display: block;
+}
+
+/* Overlay */
+#overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease;
+    z-index: 1500;
+}
+
+#overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Hero */
+#hero {
+    height: 80vh;
+    /* Reduced height for smaller size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    /* Reduced padding */
+}
+
+.hero-content h1 {
+    font-size: 36px;
+    /* Reduced font size */
+    margin-bottom: 15px;
+    /* Reduced margin */
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero-content p {
+    font-size: 16px;
+    /* Reduced font size */
+    margin-bottom: 20px;
+    /* Reduced margin */
+}
+
+.search-bar {
+    display: flex;
+    max-width: 500px;
+    /* Reduced max-width */
+    margin: 0 auto 20px auto;
+    /* Reduced margin */
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    /* Reduced padding */
+    border: none;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    /* Reduced padding */
+    border: none;
+    border-radius: 0 8px 8px 0;
+    background: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-bar button:hover {
+    background: #e6b800;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Book Visit - CENTERING APPLIED */
+.book-visit-btn {
+    display: block;
+    /* Changed to block for centering */
+    padding: 10px 20px;
+    /* Reduced padding */
+    background: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 20px auto 0 auto;
+    /* KEY: margin: auto for horizontal centering */
+    width: fit-content;
+    /* KEY: To keep it not full width and allow margin: auto to work */
+}
+
+.book-visit-btn:hover {
+    background: #e6b800;
+    transform: scale(1.05);
+}
+
+#book-visit-toggle {
+    display: none;
+}
+
+.book-visit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s ease-in-out;
+    z-index: 2000;
+}
+
+#book-visit-toggle:checked+.book-visit-modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.book-visit-modal .modal-content {
+    background: #111;
+    padding: 30px 25px;
+    /* Reduced padding */
+    border-radius: 15px;
+    max-width: 400px;
+    /* Reduced max-width */
+    width: 90%;
+    position: relative;
+    text-align: center;
+}
+
+.book-visit-modal .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    /* Reduced font size */
+    color: #ffcc00;
+    cursor: pointer;
+}
+
+.book-visit-modal input,
+.book-visit-modal textarea,
+.book-visit-modal button {
+    width: 100%;
+    margin: 10px 0;
+    /* Reduced margin */
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    /* Reduced font size */
+    padding: 10px;
+    /* Reduced padding */
+}
+
+.book-visit-modal button {
+    background: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.book-visit-modal button:hover {
+    background: #e6b800;
+    transform: scale(1.05);
+}
+
+/* Sections */
+.section {
+    padding: 40px 20px;
+    /* Reduced padding */
+    background: rgba(0, 0, 0, 0.5);
+    margin: 20px 0;
+    /* Reduced margin */
+    border-radius: 12px;
+}
+
+.section h2 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+    /* Reduced margin */
+    text-align: center;
+    font-size: 24px;
+    /* Reduced font size */
+}
+
+.section p {
+    font-size: 14px;
+    /* Reduced font size */
+    margin-bottom: 15px;
+    /* Reduced margin */
+    line-height: 1.6;
+}
+
+/* FEATURES VIDEO CENTERING APPLIED */
+.features-video {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Cards */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    /* Reduced gap */
+}
+
+.card {
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 15px;
+    /* Reduced padding */
+    width: 300px;
+    /* Reduced width */
+    text-align: center;
+    position: relative;
+}
+
+.card h3 {
+    margin: 10px 0;
+    /* Reduced margin */
+    font-size: 18px;
+    /* Reduced font size */
+}
+
+.card p {
+    font-size: 12px;
+    /* Reduced font size */
+    margin-bottom: 10px;
+    /* Reduced margin */
+    line-height: 1.5;
+}
+
+/* Listing Videos */
+#listings video {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    /* Reduced max-height */
+    border-radius: 20px;
+    /* Reduced border-radius */
+    object-fit: cover;
+}
+
+.card video:hover {
+    transform: scale(1.05);
+}
+
+/* Card Buttons */
+.card-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    /* Reduced gap */
+    flex-wrap: wrap;
+    margin-top: 8px;
+    /* Reduced margin */
+}
+
+.card-buttons button {
+    padding: 6px 10px;
+    /* Reduced padding */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 12px;
+    /* Reduced font size */
+}
+
+.fav-btn {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+.fav-btn:hover {
+    background: #ff1a1a;
+}
+
+.share-btn {
+    background: #ffcc00;
+    color: #fff;
+}
+
+.share-btn:hover {
+    background: #ffcc00;
+}
+
+.view-details {
+    background: #ffcc00;
+    color: #000;
+}
+
+.view-details:hover {
+    background: #e6b800;
+}
+
+/* Real Estate Insights Video */
+.video-slider {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    /* Reduced max-width */
+    height: 350px;
+    /* Reduced height */
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-slider video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.video-slider video.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Specific styling for video inside .features-video */
+.features-video video {
+    max-width: 600px;
+    /* To prevent it from stretching too wide on large screens */
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Modals */
+#newsModal,
+.listing-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#newsModal.active,
+.listing-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: #fff;
+    color: #111;
+    padding: 20px;
+    /* Reduced padding */
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    /* Reduced max-width */
+    text-align: left;
+    position: relative;
+}
+
+.modal-content .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    /* Reduced font size */
+    cursor: pointer;
+}
+
+/* View More Button */
+.view-more-btn {
+    background: #ffcc00;
+    color: #000;
+    border: none;
+    padding: 8px 15px;
+    /* Reduced padding */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 14px;
+    /* Reduced font size */
+}
+
+.view-more-btn:hover {
+    background: #ffcc00;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 20px;
+    /* Reduced padding */
+    text-align: center;
+    font-size: 12px;
+    /* Reduced font size */
+}
+
+footer .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    /* Reduced gap */
+}
+
+footer .footer-right {
+    margin-top: 10px;
+    /* Reduced margin */
+}
+
+footer .social-link {
+    color: #ffcc00;
+    margin: 0 8px;
+    /* Reduced margin */
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 12px;
+    /* Reduced font size */
+}
+
+footer .social-link:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media(max-width:768px) {
+    #hero {
+        height: auto;
+        padding: 30px 10px;
+        /* Reduced padding */
+    }
+
+    .hero-content h1 {
+        font-size: 28px;
+        /* Reduced font size */
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card video,
+    #video video {
+        width: 90%;
+        height: auto;
+    }
+
+    .video-slider {
+        height: auto;
+    }
+
+    .section {
+        padding: 30px 15px;
+        /* Further reduced for mobile */
+    }
+
+    .card {
+        width: 90%;
+        /* More responsive width */
+    }
+
+    header {
+        padding: 8px 15px;
+        /* Reduced for mobile */
+    }
+
+    .logo {
+        font-size: 18px;
+        /* Reduced for mobile */
+    }
+
+    .hamburger {
+        font-size: 20px;
+        /* Reduced for mobile */
+    }
+
+    .theme-btn {
+        padding: 6px 10px;
+        /* Reduced for mobile */
+    }
+}
+
+@media(min-width: 768px) {
+    footer .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+
+.dropdown-container {
+    display: none;
+    padding-left: 15px;
+}
+
+.dropdown-container.active {
+    display: block;
+}
+
+/* Success/Info message in Book Visit Modal */
+.success-msg {
+    text-align: center;
+    padding: 10px 15px;
+    /* Reduced padding */
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    margin-top: 10px;
+    /* Reduced margin */
+    transition: 0.3s;
+}
+
+/* User options dropdown */
+.user-section .user-options {
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    margin: 5px 0 0 0;
+    /* Reduced margin */
+}
+
+.user-section.active .user-options {
+    display: block;
+}
+
+.user-section .user-options li a {
+    padding-left: 20px;
+    /* Reduced padding */
+    font-size: 14px;
+    /* Reduced font size */
+}
+
+/* Modal generic */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    /* Reduced padding */
+    border-radius: 10px;
+    max-width: 400px;
+    /* Reduced max-width */
+    width: 90%;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    /* Reduced font size */
+}
+
+.sidebar .dropdown-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* Dropdown */
+.sidebar-links li.dropdown {
+    position: relative;
+}
+
+.sidebar-links li.dropdown .dropdown-content {
+    display: none;
+    position: relative;
+    background: rgba(0, 0, 0, 0.95);
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.sidebar-links li.dropdown .dropdown-content li a {
+    padding-left: 25px;
+    /* Reduced padding */
+    display: block;
+    font-size: 14px;
+    /* Reduced font size */
+}
+
+.sidebar-links li.dropdown.active .dropdown-content {
+    display: block;
+}
+
+/* Dropdown arrow icon rotation */
+.sidebar-links li.dropdown .dropbtn i {
+    float: right;
+    transition: transform 0.3s;
+}
+
+.sidebar-links li.dropdown.active .dropbtn i {
+    transform: rotate(180deg);
+}
+
+/* Dark Mode */
+/* Dark Mode */
+body.dark-mode {
+    background: #111 !important;
+    color: #fff !important;
+}
+
+body.dark-mode header,
+body.dark-mode .section,
+body.dark-mode .card,
+body.dark-mode footer {
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+}
+
+body.dark-mode .sidebar a {
+    color: #fff;
+}
+
+body.dark-mode .sidebar a:hover,
+body.dark-mode .sidebar a.active {
+    background: #ffcc00;
+    color: #000;
+}
+
+body.dark-mode .book-visit-modal button,
+body.dark-mode .search-bar button,
+body.dark-mode .fav-btn,
+body.dark-mode .share-btn,
+body.dark-mode .view-details,
+body.dark-mode .view-more-btn,
+body.dark-mode input,
+body.dark-mode textarea {
+    background: #444 !important;
+    color: #fff !important;
+}
+
+body.dark-mode .book-visit-modal button:hover,
+body.dark-mode .search-bar button:hover,
+body.dark-mode .fav-btn:hover,
+body.dark-mode .share-btn:hover,
+body.dark-mode .view-details:hover,
+body.dark-mode .view-more-btn:hover,
+body.dark-mode input:hover,
+body.dark-mode textarea:hover {
+    background: #666 !important;
+    color: #fff !important;
+    transform: scale(1.02);
+}
