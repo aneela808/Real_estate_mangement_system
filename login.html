@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - DreamHomes</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <div id="themeToggle" class="theme-btn">🌙</div>
+            <div class="hamburger" id="hamburger">&#9776;</div>
+        </div>
+        <div class="logo">🏠 DreamHomes</div>
+    </header>
+
+    <!-- Sidebar -->
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+        <div class="logo">🏠 DreamHomes</div>
+        <span class="close-btn" id="closeSidebar">&times;</span>
+    </div>
+    <ul class="sidebar-links">
+        <li><a href="homes.html">Home</a></li>
+
+        <li class="dropdown">
+            <a href="#" class="dropbtn">Properties &#9662;</a>
+            <ul class="dropdown-content">
+                <li><a href="properties.html?type=sale">Sale</a></li>
+                <li><a href="properties.html?type=rent">Rent</a></li>
+            </ul>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" class="dropbtn">About &#9662;</a>
+            <ul class="dropdown-content">
+                <li><a href="about.html#mission">Our Mission</a></li>
+                <li><a href="about.html#vision">Our Vision</a></li>
+                <li><a href="about.html#team">Our Team</a></li>
+            </ul>
+        </li>
+
+        <li><a href="clients.html">Clients</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login / Signup</a></li>
+    </ul>
+</div>
+
+
+    <!-- Overlay -->
+    <div id="overlay"></div>
+
+    <!-- Login Section -->
+    <section class="auth-section">
+        <div class="modal-content">
+            <h2>Login</h2>
+        <form id="loginForm" method="POST" action="login.php">
+            <input type="email" placeholder="Email" id="loginEmail" name="email" required>
+            <input type="password" placeholder="Password" id="loginPassword" name="password" required>
+            <button type="submit">Login</button>
+            <p>Don't have an account? <a href="signup.html" class="link-btn">Signup</a></p>
+        </form>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 DreamHomes. All Rights Reserved.</p>
+    </footer>
+
+    <script src="login js"></script>
+</body>
+
+</html>
