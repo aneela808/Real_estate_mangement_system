@@ -1,0 +1,36 @@
+<?php
+session_start();
+include 'connect.php';
+
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(null);
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
+
+// Fetch user info
+$sql = "SELECT user_id, name, email FROM users WHERE user_id = $user_id";
+$result = mysqli_query($conn, $sql);
+$user = mysqli_fetch_assoc($result);
+
+// Fetch favorites with property info
+$sqlFav = "
+    SELECT f.fav_id, p.title, p.location, p.price
+    FROM favourites f
+    JOIN properties p ON f.property_id = p.property_id
+    WHERE f.user_id = $user_id
+";
+$resultFav = mysqli_query($conn, $sqlFav);
+$favorites = [];
+if ($resultFav) {
+    while ($row = mysqli_fetch_assoc($resultFav)) {
+        $favorites[] = $row;
+    }
+}
+
+$user['favorites'] = $favorites;
+
+header('Content-Type: application/json');
+echo json_encode($user);
+?>
