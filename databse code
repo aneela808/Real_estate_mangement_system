@@ -1,0 +1,259 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Dec 07, 2025 at 08:23 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `real_estate`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `property_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `full_name` varchar(150) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `date` date NOT NULL,
+  `message` text NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `property_id`, `user_id`, `full_name`, `phone`, `date`, `message`, `status`, `created_at`) VALUES
+(1, 0, 1, 'aneela', '454675467', '2025-12-05', 'sss', 'pending', '2025-11-30 12:59:51'),
+(2, 0, 4, 'roheena', '098765', '2025-12-11', 'hghg', 'pending', '2025-12-01 05:16:21'),
+(3, 0, 2, 'aneela', '0000000', '2025-12-28', '  i want to visit', 'pending', '2025-12-03 04:32:43');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_messages`
+--
+
+CREATE TABLE `contact_messages` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `subject` varchar(150) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `created_at`) VALUES
+(0, 'aneela', 'aneela@gmail.com', 'quert', 'n', '2025-11-30 13:56:35'),
+(0, 'roheena', 'beebriphah@gmail.com', ' rent', 'City House - http://localhost/real_estate/properties.php?type=sale   i want to rent this roperty', '2025-12-01 05:18:50'),
+(0, 'roheena', 'beebriphah@gmail.com', ' rent', 'City House - http://localhost/real_estate/properties.php?type=sale   i want to rent this roperty', '2025-12-01 05:19:01'),
+(0, 'aneela', 'aneela@gmail.com', ' rent', ' villa - http://localhost/real_estate/properties.php?type=sale    i want to know about this', '2025-12-03 04:40:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favourites`
+--
+
+CREATE TABLE `favourites` (
+  `fav_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `property_id` int(11) NOT NULL,
+  `created_at` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `favourites`
+--
+
+INSERT INTO `favourites` (`fav_id`, `user_id`, `property_id`, `created_at`) VALUES
+(3, 3, 10, 0),
+(5, 2, 8, 0),
+(6, 2, 9, 0),
+(7, 2, 10, 0),
+(8, 4, 10, 0),
+(9, 4, 9, 0),
+(10, 2, 4, 0),
+(11, 2, 5, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `properties`
+--
+
+CREATE TABLE `properties` (
+  `property_id` int(11) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `description` text NOT NULL,
+  `type` enum('vila','apartment','house','penthouse') NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `status` enum('rent','sale','','') NOT NULL,
+  `seller_id` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `properties`
+--
+
+INSERT INTO `properties` (`property_id`, `title`, `description`, `type`, `price`, `location`, `status`, `seller_id`, `image`, `created_at`) VALUES
+(1, 'Sunny Apartment', 'A bright 2-bedroom apartment with city view, fully furnished.', 'apartment', 670000, 'rawalpindi', 'rent', 1, 'https://wallpaperaccess.com/full/3569417.jpg', '2025-11-30 10:27:20'),
+(2, 'Cozy Villa', 'Luxury villa with private pool, garden, and garage.', 'vila', 909, 'Rawalpindi', 'rent', 2, 'https://tse3.mm.bing.net/th/id/OIP.B9ZqEM4lmehXjP-CRobIMwHaE8?pid=Api&P=0&h=220', '2025-11-30 10:30:55'),
+(3, 'Modern House', '3-bedroom house with modern design and spacious backyard.', 'house', 12000, 'Islamabad', 'sale', 3, 'https://tse3.mm.bing.net/th/id/OIP.bqo6fdJ4kA_mexrs3hT52wHaEo?pid=Api&P=0&h=220', '2025-11-30 10:32:33'),
+(4, 'Lakeview penthouse', 'Charming penthouse overlooking the lake, perfect for vacations', 'penthouse', 750, 'Ravi', 'rent', 5, 'https://thumbs.dreamstime.com/b/beautiful-terrace-modern-penthouse-lake-view-300882399.jpg?w=992', '2025-11-30 10:35:49'),
+(5, 'Downtown Apartment', 'Apartment in the heart of the city, close to shops and transport', 'apartment', 900, 'Islamabad', 'rent', 6, 'https://tse1.mm.bing.net/th/id/OIP.to3s0nqitWzJ7WwcTQW-BQHaHa?pid=Api&P=0&h=220', '2025-11-30 10:38:28'),
+(6, 'Beachside Villa', 'Villa with direct beach access and stunning ocean view', 'vila', 2000, 'Islamabad', 'rent', 7, 'https://tse3.mm.bing.net/th/id/OIP.v4xMxFMcI3vaJ80uNv8M6QHaFj?pid=Api&P=0&h=220', '2025-11-30 10:41:17'),
+(7, 'Suburban House', 'Family-friendly house in quiet suburb with garden', 'house', 49000, 'Rawalpindi', 'sale', 8, 'https://tse4.mm.bing.net/th/id/OIP.4qDWtpw2xRnA0NLwijlVDgHaE8?pid=Api&P=0&h=220', '2025-11-30 10:43:15'),
+(8, 'City House', '3-bedroom house near downtown, fully equipped kitchen.', 'house', 700, 'Seatle', 'rent', 9, 'https://wallpaperaccess.com/full/1403962.jpg', '2025-11-30 10:46:12'),
+(9, 'Sunset Villa', 'Villa with private pool, sunset view, and garden', 'vila', 540, 'Rawalpindi', 'sale', 10, 'https://tse2.mm.bing.net/th/id/OIP._SkafzlZvb0YDKqHQy0_kwHaDt?pid=Api&P=0&h=220', '2025-11-30 10:48:59'),
+(10, 'Greenfield House', 'Family house with backyard, near schools and parks', 'house', 600, 'Rawalpindi', 'rent', 11, 'https://tse1.mm.bing.net/th/id/OIP.6m9Q7s26rLo20FOr0rT4_AHaFj?pid=Api&P=0&h=220', '2025-11-30 10:51:33'),
+(11, 'villa', 'bbbbbbb', 'vila', 3200, 'rawalpindi', 'sale', 90, 'https://b8architecture.com/dev/wp-content/uploads/2022/10/b8-architecture-modern-luxury-villa-ocean-miami-florida-cover.jpg', '2025-12-01 05:24:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `team_members`
+--
+
+CREATE TABLE `team_members` (
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `position` varchar(100) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `team_members`
+--
+
+INSERT INTO `team_members` (`id`, `name`, `position`, `photo`, `created_at`) VALUES
+(3, 'Emma Johnson', 'Project Manager', 'https://tse1.mm.bing.net/th/id/OIP.fBhXSFUkLFMM9v8VVUTRtgHaE8?pid=Api&P=0&h=220', '2025-11-30 11:04:18'),
+(4, 'Michael Brown', 'Lead Architect', 'https://png.pngtree.com/thumb_back/fh260/background/20220122/pngtree-confident-businessman-adults-bussiness-man-business-people-photo-image_542568.jpg', '2025-11-30 11:05:56'),
+(5, 'Sophia Davis', 'Marketing Head', 'https://static.vecteezy.com/system/resources/previews/025/474/309/large_2x/portrait-of-a-professional-woman-in-a-suit-business-woman-standing-in-an-office-ai-generated-photo.jpg', '2025-11-30 11:06:52'),
+(6, 'William Wilson', 'Sales Manager', 'https://as2.ftcdn.net/v2/jpg/05/45/89/41/1000_F_545894172_fLINXPGJs19SgFvA3P6vTvXN59iScZJ0.jpg', '2025-11-30 11:08:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(250) NOT NULL,
+  `role` varchar(20) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `role`, `created_at`) VALUES
+(1, 'admin', 'admin@gmail.com', 'admin123', 'admin', '2025-11-30 09:53:24'),
+(2, 'aneela', 'aneela@gmail.com', '11640', '', '2025-11-30 13:16:54'),
+(3, 'eman', 'eman@gmail.com', '0987', '', '2025-11-30 14:47:54'),
+(4, 'roheena', 'roheena@gmail.com', '0987', '', '2025-12-01 05:14:26');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `favourites`
+--
+ALTER TABLE `favourites`
+  ADD PRIMARY KEY (`fav_id`);
+
+--
+-- Indexes for table `properties`
+--
+ALTER TABLE `properties`
+  ADD PRIMARY KEY (`property_id`);
+
+--
+-- Indexes for table `team_members`
+--
+ALTER TABLE `team_members`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `favourites`
+--
+ALTER TABLE `favourites`
+  MODIFY `fav_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `properties`
+--
+ALTER TABLE `properties`
+  MODIFY `property_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `team_members`
+--
+ALTER TABLE `team_members`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
